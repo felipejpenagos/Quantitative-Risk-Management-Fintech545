@@ -15,18 +15,21 @@ def neg_log_likelihood(params):
     beta = params[3:6]
     
     # Linear prediction with centered errors (mu=0)
-    y_pred = alpha + X @ beta
+    y_pred = alpha + X @ beta  # equation formulation: y_hat = alpha + b1*x1 + b2*x2 + b3*x3
     residuals = y - y_pred
     
     if sigma <= 0 or nu <= 0:
         return 1e10
     
+    # Log-likelihood for t-distribution, formula reference: 
+    # log L = Σ log [ t_pdf((y_i - y_pred)/sigma; nu) / sigma ]
     log_lik = np.sum(stats.t.logpdf(residuals / sigma, df=nu) - np.log(sigma))
+    
     return -log_lik
 
 # Initialize with OLS
 X_with_intercept = np.column_stack([np.ones(len(X)), X])
-beta_init = np.linalg.lstsq(X_with_intercept, y, rcond=None)[0]
+beta_init = np.linalg.lstsq(X_with_intercept, y, rcond=None)[0]  # lstsq is the least squares solution 
 residuals_init = y - X_with_intercept @ beta_init
 
 initial_params = [np.std(residuals_init), 5.0] + beta_init.tolist()
