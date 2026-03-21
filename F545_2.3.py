@@ -3,6 +3,21 @@ import pandas as pd
 
 # hybrid: EW variance (lambda=0.97) and EW correlation (lambda=0.94)
 def ew_cov_hybrid(filepath, lambda_var=0.97, lambda_corr=0.94):
+    '''
+    the output is ONE covariance matrix.
+    Here's the flow:
+
+    Calculate EW variances (diagonal) using λ=0.97 → get σ²ᵢ for each stock
+    Calculate EW correlation matrix using λ=0.94 → get ρᵢⱼ
+    Combine them into one covariance matrix using: Cov(i,j) = ρᵢⱼ · σᵢ · σⱼ
+
+    The output is the hybrid covariance matrix - it has:
+
+    Diagonal (variances) from λ=0.97
+    Off-diagonal (covariances) constructed from λ=0.94 correlations × λ=0.97 std devs
+
+    So testout_2_3.csv is ONE 5×5 covariance matrix that's a blend of both lambdas.
+    '''
     df = pd.read_csv(filepath)
     n = len(df)
     
