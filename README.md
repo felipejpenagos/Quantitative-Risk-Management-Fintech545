@@ -108,7 +108,8 @@ Both notebooks contain mathematical derivations, commented Python implementation
 .
 ├── F545_QRM_Notebook1.ipynb     # Master notebook — Weeks 1–7
 ├── F545_QRM_Notebook2.ipynb     # Master notebook — Weeks 7–13
-├── F545_7.1.py  …  F545_12.3.py # Individual assignment scripts
+├── Code
+  ├──F545_7.1.py  …  F545_12.3.py # Individual assignment scripts
 └── data/                         # Input CSVs and expected output files
 ```
 
