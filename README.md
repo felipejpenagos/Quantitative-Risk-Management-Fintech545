@@ -112,16 +112,6 @@ Both notebooks contain mathematical derivations, commented Python implementation
   ├──F545_7.1.py  …  F545_12.3.py # Individual assignment scripts
 └── data/                         # Input CSVs and expected output files
 ```
-
 ---
+**Felipe Jaramillo Penagos** · Financial Engineering & Mathematics · Duke University  
 
-## Dependencies
-
-```bash
-pip install numpy pandas scipy matplotlib
-```
-
----
-
-**Felipe Jaramillo Penagos** · M.S. Quantitative Management · Duke University  
-[github.com/felipejpenagos](https://github.com/felipejpenagos)
