@@ -22,28 +22,6 @@ Both notebooks contain mathematical derivations, commented Python implementation
 
 ## Assignments (Code folder)
 
-### Statistical Foundations
-
-| Test | Description |
-|---|---|
-| 6.1 | Calculate arithmetic returns |
-| 6.2 | Calculate log returns |
-| 7.1 | Fit a Normal Distribution via MLE |
-| 7.2 | Fit a T-Distribution via MLE |
-| 7.3 | T-Distribution Regression (robust regression with fat-tailed errors) |
-
-### Covariance & Correlation Estimation
-
-| Test | Description |
-|---|---|
-| 1.1 | Covariance with missing data — skip missing rows |
-| 1.2 | Correlation with missing data — skip missing rows |
-| 1.3 | Covariance with missing data — pairwise |
-| 1.4 | Correlation with missing data — pairwise |
-| 2.1 | Exponentially Weighted Covariance (λ = 0.97) |
-| 2.2 | Exponentially Weighted Correlation (λ = 0.94) |
-| 2.3 | Combined EW Covariance — EW variance (λ = 0.97) + EW correlation (λ = 0.94) |
-
 ### PSD Matrix Repair
 
 | Test | Description |
