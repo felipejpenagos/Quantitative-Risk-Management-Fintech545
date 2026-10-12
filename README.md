@@ -1,95 +1,117 @@
-# FINTECH 545 — Quantitative Risk Management
+<div align="center">
 
-**Duke University · Pratt School of Engineering · Spring 2026**  
-**Instructor:** Prof. Dominic J. Pazzula, Head of Engineering and Risk at DUMAC
+# Quantitative Risk Management
+
+### FINTECH 545 · Duke University · Spring 2026
+
+[![Duke](https://img.shields.io/badge/Duke-FINTECH%20545-00539B?style=flat-square)](#about)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](#structure)
+[![Related paper](https://img.shields.io/badge/Related%20paper-MVO%20vs.%20Risk%20Parity-B31B1B?style=flat-square)](https://github.com/felipejpenagos/Portfolio-Optimization-Theory)
+
+</div>
 
 ---
 
-This repository contains all coursework for FINTECH 545. The course covers the mathematical and computational foundations of modern risk — from statistical modeling and simulation to options pricing, portfolio construction, and performance attribution. All implementations are in **Python**.
+Python implementations of the core toolkit of quantitative risk management: covariance repair, simulation, value at risk and expected shortfall, portfolio construction, attribution, and option pricing. Each module is checked against reference outputs in `data/`.
 
----
+The course's final paper, comparing mean-variance optimization with risk parity, lives in its own repository: **[Portfolio-Optimization-Theory](https://github.com/felipejpenagos/Portfolio-Optimization-Theory)**.
 
 ## Notebooks
 
 | Notebook | Coverage |
 |---|---|
-| `F545_QRM_Notebook1.ipynb` | Weeks 1–7 · Midterm material |
-| `F545_QRM_Notebook2.ipynb` | Weeks 7–13 · Final material |
+| `F545_QRM_Notebook1.ipynb` | Weeks 1–7: derivations, implementations, and worked problems |
+| `F545_QRM_Notebook2.ipynb` | Weeks 7–13: derivations, implementations, and worked problems |
 
-Both notebooks contain mathematical derivations, commented Python implementations, worked examples, and exam-style practice problems with full solutions.
+## Modules
 
----
+**Covariance estimation**
 
-## Assignments (Code folder)
-
-### PSD Matrix Repair
-
-| Test | Description |
+| Test | Method |
 |---|---|
-| 3.1 | Near PSD covariance (Rebonato & Jäckel) |
-| 3.2 | Near PSD correlation (Rebonato & Jäckel) |
-| 3.3 | Nearest PSD covariance (Higham's algorithm) |
-| 3.4 | Nearest PSD correlation (Higham's algorithm) |
-| 4.1 | Cholesky decomposition of PSD matrix |
+| 1.1 · 1.2 | Covariance and correlation, skipping rows with missing data |
+| 1.3 · 1.4 | Pairwise covariance and correlation using all available data |
+| 2.1 · 2.2 | Exponentially weighted covariance and correlation |
+| 2.3 | Hybrid: EW variance (λ = 0.97) with EW correlation (λ = 0.94) |
 
-### Simulation
+**Covariance repair**
 
-| Test | Description |
+| Test | Method |
 |---|---|
-| 5.1 | Normal simulation — PD input, 0 mean, 100k draws |
-| 5.2 | Normal simulation — PSD input, 0 mean, 100k draws |
-| 5.3 | Normal simulation — non-PSD input, near_psd fix, 100k draws |
-| 5.4 | Normal simulation — non-PSD input, Higham fix, 100k draws |
-| 5.5 | PCA simulation — 99% explained variance, 0 mean, 100k draws |
+| 3.1 | Near-PSD covariance (Rebonato and Jäckel) |
+| 3.2 | Near-PSD correlation (Rebonato and Jäckel) |
+| 3.3 | Nearest PSD covariance (Higham) |
+| 3.4 | Nearest PSD correlation (Higham) |
+| 4.1 | Cholesky factorization of a PSD matrix |
 
-### Risk Measures (VaR & ES)
+**Simulation**
 
-| Test | Description |
+| Test | Method |
 |---|---|
-| 8.1 | VaR from Normal Distribution |
-| 8.2 | VaR from T-Distribution |
-| 8.3 | VaR from Simulation (validated against 8.2) |
-| 8.4 | ES from Normal Distribution |
-| 8.5 | ES from T-Distribution |
-| 8.6 | ES from Simulation (validated against 8.5) |
-| 9.1 | VaR & ES at 2 confidence levels from Gaussian Copula simulation |
+| 5.1 | Multivariate normal, positive-definite input, 100k draws |
+| 5.2 | Multivariate normal, PSD input, 100k draws |
+| 5.3 | Multivariate normal, non-PSD input repaired with near-PSD |
+| 5.4 | Multivariate normal, non-PSD input repaired with Higham |
+| 5.5 | PCA simulation at 99% explained variance |
 
-### Portfolio Optimization
+**Returns and distribution fitting**
 
-| Test | Description |
+| Test | Method |
 |---|---|
-| 10.1 | Risk Parity portfolio — normal assumption |
-| 10.2 | Risk Parity portfolio — ½ risk budget on X5 |
-| 10.3 | Maximum Sharpe Ratio portfolio — normal assumption, w ≥ 0 |
-| 10.4 | Maximum Sharpe Ratio portfolio — normal assumption, 0.1 ≤ w ≤ 0.5 |
+| 6.1 · 6.2 | Arithmetic and log returns from prices |
+| 7.1 · 7.2 | Normal and t-distribution fits by maximum likelihood |
+| 7.3 | Regression with t-distributed errors, initialized from OLS |
 
-### Risk & Return Attribution
+**Value at risk and expected shortfall**
 
-| Test | Description |
+| Test | Method |
 |---|---|
-| 11.1 | Ex-post return and risk attribution per stock (Cariño linking) |
+| 8.1 · 8.4 | VaR and ES under a normal distribution |
+| 8.2 · 8.5 | VaR and ES under a fitted t-distribution |
+| 8.3 · 8.6 | VaR and ES from simulation, validated against the t results |
+| 9.1 | Portfolio VaR and ES at two confidence levels via Gaussian copula |
+
+**Portfolio construction**
+
+| Test | Method |
+|---|---|
+| 10.1 | Risk parity under normality |
+| 10.2 | Risk budgeting with half the budget on one asset |
+| 10.3 | Maximum Sharpe ratio, long-only |
+| 10.4 | Maximum Sharpe ratio with weight bounds 0.1 ≤ w ≤ 0.5 |
+
+**Attribution**
+
+| Test | Method |
+|---|---|
+| 11.1 | Ex-post return and risk attribution by asset (Cariño linking) |
 | 11.2 | Ex-post return and risk attribution to Fama-French factors |
 
-### Options Pricing
+**Option pricing**
 
-| Test | Description |
+| Test | Method |
 |---|---|
-| 12.1 | European options via Generalized BSM including all Greeks |
-| 12.2 | American options with continuous dividends including Greeks |
+| 12.1 | European options under generalized Black-Scholes-Merton, with all Greeks |
+| 12.2 | American options with continuous dividends, with Greeks |
 | 12.3 | American options with discrete dividends (non-recombining binomial tree) |
 
----
-
-## Repository Structure
+## Structure
 
 ```
 .
-├── F545_QRM_Notebook1.ipynb     # Master notebook — Weeks 1–7
-├── F545_QRM_Notebook2.ipynb     # Master notebook — Weeks 7–13
-├── Code
-  ├──F545_7.1.py  …  F545_12.3.py # Individual assignment scripts
-└── data/                         # Input CSVs and expected output files
+├── F545_QRM_Notebook1.ipynb    weeks 1–7
+├── F545_QRM_Notebook2.ipynb    weeks 7–13
+├── Code/                       one script per module (F545_1.1.py … F545_12.3.py)
+└── data/                       inputs and reference outputs
 ```
----
-**Felipe Jaramillo Penagos** · Financial Engineering & Mathematics · Duke University  
 
+## Run
+
+```bash
+pip install numpy pandas scipy statsmodels matplotlib
+python Code/F545_8.2.py
+```
+
+## About
+
+Coursework for FINTECH 545, Quantitative Risk Management, taught by Prof. Dominic J. Pazzula (Head of Engineering and Risk, DUMAC) at Duke University's Pratt School of Engineering.
